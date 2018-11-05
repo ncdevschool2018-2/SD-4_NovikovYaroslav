@@ -1,0 +1,32 @@
+body{
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+.login-part{
+    transform: translateY(40%);
+    box-shadow: 0px 0px 50px #fff;
+    background:linear-gradient(rgba(55,0,0,.6),rgba(0,0,0,.6))
+}
+.login-part img,.form-part .input-group,.submit-btn{
+    margin:10px 0px;
+}
+.form-row .txt-btn{
+    border-radius:0px 5px 5px 0px;
+    width:13%;
+}
+.input-group input{
+    color:#000;
+    font-weight: bold;
+    letter-spacing:1px;
+}
+.invalid-tooltip{
+    line-height:0 !important;
+    width: 350px;
+}
+.control:invalid{
+    border:5px solid red !important;
+}
+.form-check{
+    margin-top:5px;
+}
