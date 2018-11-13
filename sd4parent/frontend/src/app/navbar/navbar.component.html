@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-info">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#" routerLink="/home">
+      <img src="img/icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      SubsControl
+    </a>
+    <div id="navbarSupportedContent" class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto" *ngIf = "( role == 'user' )">
+        <li class="nav-item">
+          <a href="#" class="nav-link" routerLink="/cards">Subscriptions</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">My subscriptions</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">Balance</a>
+        </li>
+
+      </ul>
+
+      <ul class="navbar-nav mr-auto" *ngIf = "( role == 'admin' )">
+        <li class="nav-item">
+          <a href="#" class="nav-link" routerLink="/accounts">Accounts</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" routerLink="/products">Products</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav mr-auto" *ngIf = "( role == null )">
+        <li class="nav-item active"><a></a>
+        </li>
+      </ul>
+
+      <form class="form-inline my-2 my-lg-0">
+        <div class="btn-group mr-sm-2" dropdown>
+          <button id="button-basic" dropdownToggle type="button" class="btn btn-outline-light my-2 my-sm-0 mr-sm-2 dropdown-toggle" aria-controls="dropdown-basic">
+            Categories <span class="caret"></span>
+          </button>
+          <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+            <li role="menuitem"><button class="dropdown-item">Category 1</button></li>
+            <li role="menuitem"><button class="dropdown-item">Category 2</button></li>
+            <li role="menuitem"><button class="dropdown-item">Category 3</button></li>
+
+          </ul>
+        </div>
+        <input type="text" class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-light my-2 my-sm-0 mr-sm-2">Search</button>
+
+        <div class="btn-group mr-sm-2" dropdown>
+          <button id="button-basic1" dropdownToggle type="button" class="btn btn-outline-light my-2 my-sm-0 mr-sm-2 dropdown-toggle" aria-controls="dropdown-basic" *ngIf = "( role == 'user' )">
+            <img src="img/img_avatar2.png" width="25" height="25" class="d-inline-block align-top" alt="">
+            Yaroslav <span class="caret"></span>
+          </button>
+          <ul id="dropdown-basic1" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+            <li role="menuitem"><button class="dropdown-item">Information</button></li>
+            <li role="menuitem"><button class="dropdown-item">Settings</button></li>
+            <li role="menuitem"><button class="dropdown-item">Support</button></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><button class="dropdown-item">Log out</button></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <button class="btn btn-outline-light my-2 my-sm-0 mr-sm-2" routerLink= "/admin" *ngIf = "( role == 'admin' )">Admin</button>
+              <a routerLink = "/login" *ngIf = "( role == null )" ><app-signin-modal></app-signin-modal></a></li>
+          </ul>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</nav>

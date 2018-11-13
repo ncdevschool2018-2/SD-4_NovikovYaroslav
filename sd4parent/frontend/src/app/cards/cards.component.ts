@@ -1,47 +1,48 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
-import {BillingAccount} from "../model/billing-account";
-import {BillingAccountService} from "../service/billing/billing-account.service";
+import {Product} from "../model/product";
+import {ProductService} from "../service/product.service";
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import {Subscription} from "rxjs/internal/Subscription";
 import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
 
 @Component({
-  selector: 'billing-accounts',
-  templateUrl: './billing-accounts.component.html'
+  selector: 'card',
+  templateUrl: './cards.component.html'
 })
-export class BillingAccountsComponent implements OnInit {
+
+export class CardsComponent implements OnInit {
 
   public editMode = false;
 
-  public billingAccounts: BillingAccount[];
-  public editableBa: BillingAccount = new BillingAccount();
+  public products: Product[];
+  public editablePr: Product = new Product();
   public modalRef: BsModalRef; //we need a variable to keep a reference of our modal. This is going to be used to close the modal.
 
   private subscriptions: Subscription[] = [];
 
 
   // Dependency injection for BillingAccountService into Billing
-  constructor(private billingAccountService: BillingAccountService,
+  constructor(private productService: ProductService,
               private loadingService: Ng4LoadingSpinnerService,
               private modalService: BsModalService) { //to show the modal, we also need the ngx-bootstrap service
   }
 
   // Calls on component init
   ngOnInit() {
-    this.loadBillingAccounts();
+    this.loadProducts();
   }
 
   public _closeModal(): void {
     this.modalRef.hide();
   }
 
-  public _openModal(template: TemplateRef<any>, billingAccount: BillingAccount): void {
+  public _openModal(template: TemplateRef<any>, product: Product): void {
 
-    if (billingAccount) {
+    if (product) {
       this.editMode = true;
-      this.editableBa = BillingAccount.cloneBase(billingAccount);
+      this.editablePr = Product.cloneBase(product);
     } else {
-      this.refreshBa();
+      this.refreshPr();
       this.editMode = false;
     }
 
@@ -49,40 +50,40 @@ export class BillingAccountsComponent implements OnInit {
                                                       // we keep the modal reference and pass the template local name to the modalService.
   }
 
-  public _addBillingAccount(): void {
+  public _addProduct(): void {
     this.loadingService.show();
-    this.subscriptions.push(this.billingAccountService.saveBillingAccount(this.editableBa).subscribe(() => {
-      this._updateBillingAccounts();
-      this.refreshBa();
+    this.subscriptions.push(this.productService.saveProduct(this.editablePr).subscribe(() => {
+      this._updateProducts();
+      this.refreshPr();
       this._closeModal();
       this.loadingService.hide();
 
     }));
   }
 
-  public _updateBillingAccounts(): void {
-    this.loadBillingAccounts();
+  public _updateProducts(): void {
+    this.loadProducts();
   }
 
-  public _deleteBillingAccount(billingAccountId: string): void {
+  public _deleteProduct(productId: string): void {
     this.loadingService.show();
-    this.subscriptions.push(this.billingAccountService.deleteBillingAccount(billingAccountId).subscribe(() => {
-      this._updateBillingAccounts();
+    this.subscriptions.push(this.productService.deleteProduct(productId).subscribe(() => {
+      this._updateProducts();
     }));
   }
 
-  private refreshBa(): void {
-    this.editableBa = new BillingAccount();
+  private refreshPr(): void {
+    this.editablePr = new Product();
   }
 
-  private loadBillingAccounts(): void {
+  private loadProducts(): void {
     this.loadingService.show();
-    // Get data from BillingAccountService
-    this.subscriptions.push(this.billingAccountService.getBillingAccounts().subscribe(accounts => {
+    // Get data from ProductService
+    this.subscriptions.push(this.productService.getProducts().subscribe(products => {
       // Parse json response into local array
-      this.billingAccounts = accounts as BillingAccount[];
+      this.products = products as Product[];
       // Check data in console
-      console.log(this.billingAccounts);// don't use console.log in angular :)
+      console.log(this.products);// don't use console.log in angular :)
       this.loadingService.hide();
     }));
   }

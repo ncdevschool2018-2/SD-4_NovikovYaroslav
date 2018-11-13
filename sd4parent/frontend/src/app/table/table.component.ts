@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'tables',
+  selector: 'table',
   templateUrl: './table.component.html'
 })
 export class TableComponent implements OnInit{

@@ -21,6 +21,11 @@ public class ProductDataController {
         return ResponseEntity.ok(productDataService.getAll());
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<ProductViewModel> getProductById(@PathVariable(name = "id") Long id) {
+        return ResponseEntity.ok(productDataService.getProductById(id));
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<ProductViewModel> saveProduct(@RequestBody ProductViewModel product /*todo server validation*/) {
         if (product != null) {

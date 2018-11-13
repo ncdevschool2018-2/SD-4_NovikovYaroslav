@@ -1,11 +1,8 @@
 <ng4-loading-spinner> </ng4-loading-spinner>
 <div class="container mt-lg-5">
   <div class="row">
-
     <div class="col">
-
       <h4>Products component:</h4>
-
       <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -41,10 +38,6 @@
     </div>
   </div>
   <div class="row">
-    <div class="col">
-      <button type="button" class="btn btn-dark" (click)="_updateProducts()">Update</button>
-
-    </div>
     <div class="col">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
               (click)="_openModal(template)">
@@ -99,7 +92,6 @@
       <label>Pictures</label>
       <input class="form-control" name="pictures" [(ngModel)]="editablePr.pictures" #pictures="ngModel" required/>
     </div>
-
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" (click)="_addProduct(title, cost, days,description,pictures)"

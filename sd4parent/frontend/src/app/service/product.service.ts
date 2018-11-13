@@ -25,4 +25,8 @@ export class ProductService { //todo create interface
     return this.http.delete<void>('/api/pr/' + productId);
   }
 
+  getProductById(productId: number): Observable<Product> {
+    return this.http.get<Product>( '/api/pr/' + productId);
+  }
+
 }

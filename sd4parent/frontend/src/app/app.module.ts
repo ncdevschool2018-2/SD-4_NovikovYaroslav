@@ -5,17 +5,37 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule }   from '@angular/forms';
 
+import { CarouselModule } from "ngx-bootstrap/carousel";
+
+
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import { BillingAccountsComponent } from './billing-accounts/billing-accounts.component';
 import {ProductsComponent} from "./products/products.component";
 import {Ng4LoadingSpinnerModule} from "ng4-loading-spinner";
+import {NavbarComponent} from "./navbar/navbar.component";
+import {SigninModalComponent} from "./signin-modal/signin-modal.component";
+import {ChatComponent} from "./chat/chat.component";
+import {CarouselComponent} from "./carousel/carousel.component";
+import {TableComponent} from "./table/table.component";
+import {CollapseModule} from "ngx-bootstrap";
+import {CardsComponent} from "./cards/cards.component";
+import {AppRoutingModule} from "./app-routing.module";
+import {AdminPageComponent} from "./admin-page/admin-page.component";
+import {CardsDetailComponent} from "./cards/cards-detail.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     BillingAccountsComponent,
-    ProductsComponent
+    ProductsComponent,
+    NavbarComponent,
+    SigninModalComponent,
+    ChatComponent,
+    CarouselComponent,
+    CardsComponent,
+    AdminPageComponent,
+    CardsDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +44,11 @@ import {Ng4LoadingSpinnerModule} from "ng4-loading-spinner";
     Ng4LoadingSpinnerModule.forRoot(),
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    AppRoutingModule,
+
+    CarouselModule.forRoot(),
+    CollapseModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
