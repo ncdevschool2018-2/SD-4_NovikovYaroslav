@@ -39,4 +39,14 @@ public class ProductDataController {
         productDataService.deleteProduct(Long.valueOf(id));
     }
 
+    /*@RequestMapping(value = "/page/{num}", method = RequestMethod.GET)
+    public ResponseEntity<List<ProductViewModel>> getProductsByPage(@PathVariable(name = "num") int num) {
+        return ResponseEntity.ok(productDataService.getProductsByPage(num));
+    }
+
+    @RequestMapping(value = "/total-pages", method = RequestMethod.GET)
+    public int getTotalPages() {
+        return productDataService.getTotalPages();
+    }*/
+
 }

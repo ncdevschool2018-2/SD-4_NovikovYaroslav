@@ -1,10 +1,14 @@
 package com.netcracker.edu.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "user")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,17 +20,19 @@ public class User {
     private String password;
     @Column(name = "role")
     private String role;
-    @Column(name = "id_account")
-    private long idAcc;
+
+    @PrimaryKeyJoinColumn(name = "id_user", referencedColumnName = "id_account")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private BillingAccount account;
 
     public User() {
     }
 
-    public User(String login, String password, String role, long idAcc) {
+    public User(String login, String password, String role, BillingAccount account) {
         this.login = login;
         this.password = password;
         this.role = role;
-        this.idAcc = idAcc;
+        this.account = account;
     }
 
     public long getId() {
@@ -61,12 +67,12 @@ public class User {
         this.role = role;
     }
 
-    public long getIdAcc() {
-        return idAcc;
+    public BillingAccount getAccount() {
+        return account;
     }
 
-    public void setIdAcc(long idAcc) {
-        this.idAcc = idAcc;
+    public void setAccount(BillingAccount account) {
+        this.account = account;
     }
 
     @Override
@@ -75,15 +81,15 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return id == user.id &&
-                idAcc == user.idAcc &&
                 Objects.equals(login, user.login) &&
                 Objects.equals(password, user.password) &&
-                Objects.equals(role, user.role);
+                Objects.equals(role, user.role) &&
+                Objects.equals(account, user.account);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, login, password, role, idAcc);
+        return Objects.hash(id, login, password, role, account);
     }
 
     @Override
@@ -93,7 +99,7 @@ public class User {
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
-                ", idAcc=" + idAcc +
+                ", account=" + account +
                 '}';
     }
 }

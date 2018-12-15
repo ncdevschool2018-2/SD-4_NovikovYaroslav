@@ -2,6 +2,7 @@ package com.netcracker.edu.backend.service;
 
 import com.netcracker.edu.backend.entity.BillingAccount;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface BillingAccountService {
@@ -9,4 +10,6 @@ public interface BillingAccountService {
     Optional<BillingAccount> getBillingAccountById(Long id);
     Iterable<BillingAccount> getAllBillingAccounts();
     void deleteBillingAccount(Long id);
+    /*List<BillingAccount> getBillingAccountsByRole(String userRoleName);
+    Optional<BillingAccount> getBillingAccountByLoginAndPassword(String login, String password);*/
 }

@@ -9,38 +9,54 @@ import java.util.Objects;
 public class AccountProducts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_account")
-    private long idAcc;
-    @Column(name = "id_product")
-    private long idPr;
+    @Column(name = "id_account_products")
+    private long id;
+    @ManyToOne(cascade= CascadeType.ALL)
+    @JoinColumn(name = "id_account")
+    private BillingAccount account;
+    @OneToOne
+    @JoinColumn(name = "id_product")
+    private Product product;
     @Column(name = "date_beg")
     private Date dateBeg;
     @Column(name = "date_end")
     private Date dateEnd;
+    @Column(name = "status")
+    private boolean status;
 
     public AccountProducts() {
     }
 
-    public AccountProducts(long idPr, Date dateBeg, Date dateEnd) {
-        this.idPr = idPr;
+    public AccountProducts(BillingAccount account, Product product, Date dateBeg, Date dateEnd, boolean status) {
+        this.account = account;
+        this.product = product;
         this.dateBeg = dateBeg;
         this.dateEnd = dateEnd;
+        this.status = status;
     }
 
-    public long getIdAcc() {
-        return idAcc;
+    public long getId() {
+        return id;
     }
 
-    public void setIdAcc(long idAcc) {
-        this.idAcc = idAcc;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public long getIdPr() {
-        return idPr;
+    public BillingAccount getAccount() {
+        return account;
     }
 
-    public void setIdPr(long idPr) {
-        this.idPr = idPr;
+    public void setAccount(BillingAccount account) {
+        this.account = account;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public Date getDateBeg() {
@@ -59,29 +75,29 @@ public class AccountProducts {
         this.dateEnd = dateEnd;
     }
 
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountProducts that = (AccountProducts) o;
-        return idAcc == that.idAcc &&
-                idPr == that.idPr &&
+        return id == that.id &&
+                status == that.status &&
+                Objects.equals(account, that.account) &&
+                Objects.equals(product, that.product) &&
                 Objects.equals(dateBeg, that.dateBeg) &&
                 Objects.equals(dateEnd, that.dateEnd);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idAcc, idPr, dateBeg, dateEnd);
-    }
-
-    @Override
-    public String toString() {
-        return "AccountProducts{" +
-                "idAcc=" + idAcc +
-                ", idPr=" + idPr +
-                ", dateBeg=" + dateBeg +
-                ", dateEnd=" + dateEnd +
-                '}';
+        return Objects.hash(id, account, product, dateBeg, dateEnd, status);
     }
 }

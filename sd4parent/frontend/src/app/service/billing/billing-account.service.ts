@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {BillingAccount} from "../../model/billing-account";
+import {User} from "../../model/user";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,11 @@ export class BillingAccountService { //todo create interface
 
   deleteBillingAccount(billingAccountId: string): Observable<void> {
     return this.http.delete<void>('/api/ba/' + billingAccountId);
+  }
+
+  getUserByLoginAndPassword(login: string, password: string): Observable<User> {
+    console.log("/api/ba/auth?login=" + login + "&password=" + password);
+    return this.http.get<User>("/api/ba/auth?login=" + login + "&password=" + password);
   }
 
 }

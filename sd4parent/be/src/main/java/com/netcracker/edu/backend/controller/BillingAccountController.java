@@ -45,4 +45,11 @@ public class BillingAccountController {
         return ResponseEntity.noContent().build();
     }
 
+    /*@RequestMapping(value = "", method = RequestMethod.GET)
+    public ResponseEntity<BillingAccount> getAccountByLoginAndPassword(@RequestParam(name = "login") String login, @RequestParam(name = "password") String password) {
+        System.out.println("login=" + login +"     /     "  + "password=" + password);
+        Optional<BillingAccount> account = billingAccountService.getBillingAccountByLoginAndPassword(login, password);
+        return account.isPresent() ? ResponseEntity.ok(account.get()) : ResponseEntity.ok(new BillingAccount());
+    }
+    */
 }

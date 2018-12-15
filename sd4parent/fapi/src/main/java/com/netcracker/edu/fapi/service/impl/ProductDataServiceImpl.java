@@ -49,4 +49,17 @@ public class ProductDataServiceImpl implements ProductDataService {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.delete(backendServerUrl + "/api/products/" + id);
     }
+    /*@Override
+    public List<ProductViewModel> getProductsByPage(int page) {
+        RestTemplate restTemplate = new RestTemplate();
+        ProductViewModel[] productViewModelResponse = restTemplate.getForObject(backendServerUrl + "api/products/page/" + page, ProductViewModel[].class);
+        return productViewModelResponse == null ? Collections.emptyList() : Arrays.asList(productViewModelResponse);
+    }
+
+    @Override
+    public int getTotalPages() {
+        RestTemplate restTemplate = new RestTemplate();
+        int response = restTemplate.getForObject(backendServerUrl + "api/products/total-pages", Integer.class);
+        return response;
+    }*/
 }

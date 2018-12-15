@@ -4,12 +4,9 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule }   from '@angular/forms';
-
 import { CarouselModule } from "ngx-bootstrap/carousel";
-
-
 import { AppComponent } from './app.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { BillingAccountsComponent } from './billing-accounts/billing-accounts.component';
 import {ProductsComponent} from "./products/products.component";
 import {Ng4LoadingSpinnerModule} from "ng4-loading-spinner";
@@ -23,6 +20,9 @@ import {CardsComponent} from "./cards/cards.component";
 import {AppRoutingModule} from "./app-routing.module";
 import {AdminPageComponent} from "./admin-page/admin-page.component";
 import {CardsDetailComponent} from "./cards/cards-detail.component";
+import {AlertModule} from 'ngx-bootstrap/alert';
+import {TokenStorage} from "./service/token.storage";
+import {Interceptor} from "./service/interceptor.service";
 
 @NgModule({
   declarations: [
@@ -46,11 +46,19 @@ import {CardsDetailComponent} from "./cards/cards-detail.component";
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
     AppRoutingModule,
-
+    AlertModule.forRoot(),
     CarouselModule.forRoot(),
     CollapseModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    Interceptor,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi: true
+    },
+    TokenStorage
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

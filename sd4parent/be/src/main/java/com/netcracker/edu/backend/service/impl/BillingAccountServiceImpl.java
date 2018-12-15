@@ -6,6 +6,8 @@ import com.netcracker.edu.backend.service.BillingAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -37,4 +39,14 @@ public class BillingAccountServiceImpl implements BillingAccountService {
     public void deleteBillingAccount(Long id) {
         repository.deleteById(id);
     }
+
+    /*@Override
+    public List<BillingAccount> getBillingAccountsByRole(String userRoleName) {
+        return repository.getBillingAccountsByRole(userRoleName);
+    }
+
+    @Override
+    public Optional<BillingAccount> getBillingAccountByLoginAndPassword(@NotNull String login, @NotNull String password) {
+        return repository.getBillingAccountByLoginAndPassword(login, password);
+    }*/
 }

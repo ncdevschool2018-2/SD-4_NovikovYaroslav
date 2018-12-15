@@ -17,8 +17,10 @@ export class CardsComponent implements OnInit {
   public products: Product[];
   public editablePr: Product = new Product();
   public modalRef: BsModalRef; //we need a variable to keep a reference of our modal. This is going to be used to close the modal.
-
+  public total: number;
+  public pages: number[] = [];
   private subscriptions: Subscription[] = [];
+  public currentPage: number = 1;
 
 
   // Dependency injection for BillingAccountService into Billing
@@ -87,7 +89,21 @@ export class CardsComponent implements OnInit {
       this.loadingService.hide();
     }));
   }
+  /*private getTotalPages(): void {
+    this.subscriptions.push(this.productService.getTotalPages().subscribe(totalPages => {
+      this.total = totalPages;
+      console.log(this.total);
+      for(let i=1; i<=totalPages; i++) {
+        this.pages.push(i);
+      }
+    }))
+  }
 
+  public getProductsByPage(page: number): void {
+    this.subscriptions.push(this.productService.getProductsByPage(page).subscribe(products => {
+      this.products = products as Product[];
+    }))
+  }*/
   ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }

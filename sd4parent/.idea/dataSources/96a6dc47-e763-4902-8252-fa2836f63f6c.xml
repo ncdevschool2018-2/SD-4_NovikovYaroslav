@@ -1114,7 +1114,7 @@
     <table id="282" parent="6" name="purse"/>
     <table id="283" parent="6" name="transaction"/>
     <table id="284" parent="6" name="user"/>
-    <column id="285" parent="278" name="id">
+    <column id="285" parent="278" name="id_account">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
@@ -1141,205 +1141,283 @@
     </column>
     <key id="289" parent="278" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
+      <ColNames>id_account</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="290" parent="279" name="id_account">
-      <Position>1</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="291" parent="279" name="id_product">
-      <Position>2</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="292" parent="279" name="date_beg">
-      <Position>3</Position>
-      <DataType>date|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="293" parent="279" name="date_end">
-      <Position>4</Position>
-      <DataType>date|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="294" parent="280" name="id_features">
+    <foreign-key id="290" parent="278" name="account_user_id_user_fk">
+      <ColNames>id_account</ColNames>
+      <RefSchemaName>sd4_yn</RefSchemaName>
+      <RefTableName>user</RefTableName>
+      <RefColNames>id_user</RefColNames>
+    </foreign-key>
+    <column id="291" parent="279" name="id_account_products">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="295" parent="280" name="title">
+    <column id="292" parent="279" name="id_account">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="293" parent="279" name="id_product">
+      <Position>3</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="294" parent="279" name="date_beg">
+      <Position>4</Position>
+      <DataType>date|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="295" parent="279" name="date_end">
+      <Position>5</Position>
+      <DataType>date|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="296" parent="279" name="status">
+      <Position>6</Position>
+      <DataType>tinyint(1)|0s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="297" parent="279" name="account_products_id_account_products_uindex">
+      <ColNames>id_account_products</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <index id="298" parent="279" name="id_account_idx">
+      <ColNames>id_account</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="299" parent="279" name="id_product_idx">
+      <ColNames>id_product</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="300" parent="279" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id_account_products</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="301" parent="279" name="account_products_id_account_products_uindex">
+      <ColNames>id_account_products</ColNames>
+      <UnderlyingIndexName>account_products_id_account_products_uindex</UnderlyingIndexName>
+    </key>
+    <foreign-key id="302" parent="279" name="AccountProductsAccountFK">
+      <ColNames>id_account</ColNames>
+      <RefSchemaName>sd4_yn</RefSchemaName>
+      <RefTableName>account</RefTableName>
+      <RefColNames>id_account</RefColNames>
+    </foreign-key>
+    <foreign-key id="303" parent="279" name="AccountProductsProductFK">
+      <ColNames>id_product</ColNames>
+      <RefSchemaName>sd4_yn</RefSchemaName>
+      <RefTableName>product</RefTableName>
+      <RefColNames>id_product</RefColNames>
+    </foreign-key>
+    <column id="304" parent="280" name="id_features">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="305" parent="280" name="title">
       <Position>2</Position>
       <DataType>varchar(200)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="296" parent="280" name="cost">
+    <column id="306" parent="280" name="cost">
       <Position>3</Position>
       <DataType>double|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="297" parent="280" name="days">
+    <column id="307" parent="280" name="days">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="298" parent="280" name="id_product">
+    <column id="308" parent="280" name="id_product">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="299" parent="280" name="PRIMARY">
+    <index id="309" parent="280" name="id_product_idx">
+      <ColNames>id_product</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="310" parent="280" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id_features</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="300" parent="281" name="id">
+    <foreign-key id="311" parent="280" name="FeaturesProductFK">
+      <ColNames>id_product</ColNames>
+      <RefSchemaName>sd4_yn</RefSchemaName>
+      <RefTableName>product</RefTableName>
+      <RefColNames>id_product</RefColNames>
+    </foreign-key>
+    <column id="312" parent="281" name="id_product">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="301" parent="281" name="title">
+    <column id="313" parent="281" name="title">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="302" parent="281" name="cost">
+    <column id="314" parent="281" name="cost">
       <Position>3</Position>
       <DataType>float|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="303" parent="281" name="days">
+    <column id="315" parent="281" name="days">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="304" parent="281" name="description">
+    <column id="316" parent="281" name="description">
       <Position>5</Position>
-      <DataType>varchar(200)|0s</DataType>
+      <DataType>varchar(1000)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="305" parent="281" name="pictures">
+    <column id="317" parent="281" name="pictures">
       <Position>6</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="306" parent="281" name="PRIMARY">
+    <key id="318" parent="281" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
+      <ColNames>id_product</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="307" parent="282" name="id">
+    <column id="319" parent="282" name="id_purse">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="308" parent="282" name="number">
+    <column id="320" parent="282" name="number">
       <Position>2</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="309" parent="282" name="balance">
+    <column id="321" parent="282" name="balance">
       <Position>3</Position>
       <DataType>double|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="310" parent="282" name="id_account">
+    <column id="322" parent="282" name="id_account">
       <Position>4</Position>
-      <DataType>varchar(45)|0s</DataType>
+      <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="311" parent="282" name="PRIMARY">
+    <index id="323" parent="282" name="id_account_idx">
+      <ColNames>id_account</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="324" parent="282" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
+      <ColNames>id_purse</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="312" parent="283" name="id">
+    <foreign-key id="325" parent="282" name="PurseAccountFK">
+      <ColNames>id_account</ColNames>
+      <RefSchemaName>sd4_yn</RefSchemaName>
+      <RefTableName>account</RefTableName>
+      <RefColNames>id_account</RefColNames>
+    </foreign-key>
+    <column id="326" parent="283" name="id_transaction">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="313" parent="283" name="action">
+    <column id="327" parent="283" name="action">
       <Position>2</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="314" parent="283" name="cost">
+    <column id="328" parent="283" name="cost">
       <Position>3</Position>
       <DataType>double|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="315" parent="283" name="id_purse">
+    <column id="329" parent="283" name="id_purse">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="316" parent="283" name="PRIMARY">
+    <index id="330" parent="283" name="purseFK_idx">
+      <ColNames>id_purse</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="331" parent="283" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
+      <ColNames>id_transaction</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="317" parent="284" name="id_user">
+    <foreign-key id="332" parent="283" name="TransactionPurseFK">
+      <ColNames>id_purse</ColNames>
+      <RefSchemaName>sd4_yn</RefSchemaName>
+      <RefTableName>purse</RefTableName>
+      <RefColNames>id_purse</RefColNames>
+    </foreign-key>
+    <column id="333" parent="284" name="id_user">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="318" parent="284" name="login">
+    <column id="334" parent="284" name="login">
       <Position>2</Position>
-      <DataType>varchar(30)|0s</DataType>
+      <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="319" parent="284" name="password">
+    <column id="335" parent="284" name="password">
       <Position>3</Position>
-      <DataType>varchar(45)|0s</DataType>
+      <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="320" parent="284" name="role">
+    <column id="336" parent="284" name="role">
       <Position>4</Position>
-      <DataType>varchar(15)|0s</DataType>
+      <DataType>varchar(7)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;user&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="321" parent="284" name="id_account">
-      <Position>5</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <key id="322" parent="284" name="PRIMARY">
+    <key id="337" parent="284" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id_user</ColNames>
       <Primary>1</Primary>

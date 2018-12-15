@@ -15,9 +15,9 @@ public class Product {
     @Column(name = "title")
     private String title;
     @Column(name = "cost")
-    private String cost;
+    private Integer cost;
     @Column(name = "days")
-    private String days;
+    private Integer days;
     @Column(name = "description")
     private String description;
     @Column(name = "pictures")
@@ -27,7 +27,7 @@ public class Product {
 
     }
 
-    public Product(String title, String cost, String days, String description, String pictures) {
+    public Product(String title, Integer cost, Integer days, String description, String pictures) {
         this.title = title;
         this.cost = cost;
         this.days = days;
@@ -51,19 +51,19 @@ public class Product {
         this.title = title;
     }
 
-    public String getCost() {
+    public Integer getCost() {
         return cost;
     }
 
-    public void setCost(String cost) {
+    public void setCost(Integer cost) {
         this.cost = cost;
     }
 
-    public String getDays() {
+    public Integer getDays() {
         return days;
     }
 
-    public void setDays(String days) {
+    public void setDays(Integer days) {
         this.days = days;
     }
 

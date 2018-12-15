@@ -13,14 +13,14 @@ public class Purse {
     @Column(name = "number")
     private String number;
     @Column(name = "balance")
-    private String balance;
+    private Integer balance;
     @Column(name = "id_account")
     private long idAcc;
 
     public Purse() {
     }
 
-    public Purse(String number, String balance, long idAcc) {
+    public Purse(String number, Integer balance, long idAcc) {
         this.number = number;
         this.balance = balance;
         this.idAcc = idAcc;
@@ -42,11 +42,11 @@ public class Purse {
         this.number = number;
     }
 
-    public String getBalance() {
+    public Integer getBalance() {
         return balance;
     }
 
-    public void setBalance(String balance) {
+    public void setBalance(Integer balance) {
         this.balance = balance;
     }
 

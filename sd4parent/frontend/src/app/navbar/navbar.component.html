@@ -5,7 +5,7 @@
       SubsControl
     </a>
     <div id="navbarSupportedContent" class="collapse navbar-collapse">
-      <ul class="navbar-nav mr-auto" *ngIf = "( role == 'user' )">
+      <ul class="navbar-nav mr-auto" *ngIf="user && role === 'user'">
         <li class="nav-item">
           <a href="#" class="nav-link" routerLink="/cards">Subscriptions</a>
         </li>
@@ -15,10 +15,9 @@
         <li class="nav-item">
           <a href="#" class="nav-link">Balance</a>
         </li>
-
       </ul>
 
-      <ul class="navbar-nav mr-auto" *ngIf = "( role == 'admin' )">
+      <ul class="navbar-nav mr-auto" *ngIf="user && role === 'admin'">
         <li class="nav-item">
           <a href="#" class="nav-link" routerLink="/accounts">Accounts</a>
         </li>
@@ -27,7 +26,7 @@
         </li>
       </ul>
 
-      <ul class="navbar-nav mr-auto" *ngIf = "( role == null )">
+      <ul class="navbar-nav mr-auto" >
         <li class="nav-item active"><a></a>
         </li>
       </ul>
@@ -41,32 +40,155 @@
             <li role="menuitem"><button class="dropdown-item">Category 1</button></li>
             <li role="menuitem"><button class="dropdown-item">Category 2</button></li>
             <li role="menuitem"><button class="dropdown-item">Category 3</button></li>
-
           </ul>
         </div>
         <input type="text" class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-light my-2 my-sm-0 mr-sm-2">Search</button>
 
-        <div class="btn-group mr-sm-2" dropdown>
-          <button id="button-basic1" dropdownToggle type="button" class="btn btn-outline-light my-2 my-sm-0 mr-sm-2 dropdown-toggle" aria-controls="dropdown-basic" *ngIf = "( role == 'user' )">
+        <div class="btn-group mr-sm-2" dropdown *ngIf="user && role === 'user'">
+          <button id="button-basic1" dropdownToggle type="button" class="btn btn-outline-light my-2 my-sm-0 mr-sm-2 dropdown-toggle" aria-controls="dropdown-basic">
             <img src="img/img_avatar2.png" width="25" height="25" class="d-inline-block align-top" alt="">
-            Yaroslav <span class="caret"></span>
+            {{user.sub}} <span class="caret"></span>
           </button>
-          <ul id="dropdown-basic1" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+          <ul id="dropdown-basic1" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic" >
             <li role="menuitem"><button class="dropdown-item">Information</button></li>
             <li role="menuitem"><button class="dropdown-item">Settings</button></li>
             <li role="menuitem"><button class="dropdown-item">Support</button></li>
             <li class="divider dropdown-divider"></li>
-            <li role="menuitem"><button class="dropdown-item">Log out</button></li>
+            <li role="menuitem"><button class="dropdown-item" (click)="signOut()">Log out</button></li>
           </ul>
+        </div>
+        <div>
           <ul class="nav navbar-nav navbar-right">
-            <li>
-              <button class="btn btn-outline-light my-2 my-sm-0 mr-sm-2" routerLink= "/admin" *ngIf = "( role == 'admin' )">Admin</button>
-              <a routerLink = "/login" *ngIf = "( role == null )" ><app-signin-modal></app-signin-modal></a></li>
+              <button type="button" class="btn btn btn-outline-light my-2 my-sm-0 mr-sm-2" (click)="_openModal(signInModal)" *ngIf="!user">Sign in</button>
+              <button type="button" class="btn btn btn-outline-light my-2 my-sm-0 mr-sm-2" (click)="signOut()" *ngIf="user && role === 'admin'">Log out</button>
           </ul>
         </div>
       </form>
-
     </div>
   </div>
 </nav>
+
+<ng-template #signInModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Sign in</h4>
+    <button type="reset" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="container-fluid">
+      <form>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+            </div>
+            <input type="email" class="form-control" placeholder="Login" name="email" [(ngModel)]="loginUser.login" #login="ngModel" required>
+          </div>
+          <div [hidden]="login.valid || login.untouched" class="alert alert-danger">
+            Pls set login
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-unlock"></i></span>
+            </div>
+            <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="loginUser.password" #password="ngModel" required>
+          </div>
+          <div [hidden]="password.valid || password.untouched" class="alert alert-danger">
+            Pls set password
+          </div>
+        </div>
+        <div class="container">
+          <div class="row justify-content-between">
+            <button type="button" class="btn btn-primary" (click)="_openModal(registerModal)">Register</button>
+            <button type="reset" class="btn btn-primary" (click)="authorizate()" [disabled]="login.invalid || password.invalid">Sign in</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #registerModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Register</h4>
+    <button type="reset" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="container-fluid">
+      <form>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+            </div>
+            <input type="login" class="form-control" placeholder="Login" name="login" [(ngModel)]="editableUs.login" #login="ngModel" required>
+          </div>
+          <div [hidden]="login.valid || login.untouched" class="alert alert-danger">
+            Pls set login
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+            </div>
+            <input type="name" class="form-control" placeholder="Name" name="name" [(ngModel)]="editableAcc.name" #name="ngModel" required>
+          </div>
+          <div [hidden]="name.valid || name.untouched" class="alert alert-danger">
+            Pls set your name
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+            </div>
+            <input type="surname" class="form-control" placeholder="Surname" name="surname" [(ngModel)]="editableAcc.surname" #surname="ngModel" required>
+          </div>
+          <div [hidden]="surname.valid || surname.untouched" class="alert alert-danger">
+            Pls set your surname
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            </div>
+            <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="editableAcc.email" #email="ngModel"
+                   required pattern="[a-zA-Z0-9_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,4}">
+          </div>
+          <div [hidden]="email.valid || email.untouched" class="alert alert-danger">
+            E-mail is incorrect
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-unlock"></i></span>
+            </div>
+            <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="editableUs.password" #password="ngModel" required>
+          </div>
+          <div [hidden]="password.valid || password.untouched" class="alert alert-danger">
+            Pls set password
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row justify-content-between">
+            <button type="button" class="btn btn-primary" (click)="_openModal(signInModal)">Sign in</button>
+            <button type="reset" class="btn btn-primary col-auto" (click)="signUp()" [disabled]="login.invalid || name.invalid || surname.invalid || email.invalid || password.invalid">Register</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
+

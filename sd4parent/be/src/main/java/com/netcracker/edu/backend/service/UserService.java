@@ -9,4 +9,6 @@ public interface UserService {
     Optional<User> getUserById(Long id);
     Iterable<User> getAllUsers();
     void deleteUser(Long id);
+    Optional<User> findByLogin(String login);
+    Optional<User> getUserByLogin(String login);
 }

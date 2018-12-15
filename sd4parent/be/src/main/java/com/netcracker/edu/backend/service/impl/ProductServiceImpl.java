@@ -4,6 +4,10 @@ import com.netcracker.edu.backend.entity.Product;
 import com.netcracker.edu.backend.repository.ProductRepository;
 import com.netcracker.edu.backend.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -37,4 +41,11 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(Long id) {
         repository.deleteById(id);
     }
+
+    /*@Override
+    public Page<Product> getProductsByPage(int page) {
+        Sort sort = new Sort(new Sort.Order(Sort.Direction.ASC, "id"));
+        Pageable pageable = new PageRequest(page-1, 2, sort);
+        return (Page<Product>) repository.findAll(pageable);
+    }*/
 }

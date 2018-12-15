@@ -1,10 +1,18 @@
+<style>
+  .leftimg {
+    float:left; /* Выравнивание по левому краю */
+    margin: 7px 7px 7px 0; /* Отступы вокруг картинки */
+  }
+</style>
 <div *ngIf="product">
-  <h2>{{product.title | uppercase}} Details</h2>
-  <div><span>id: </span>{{product.id}}</div>
-  <div>
-    <label>name:
-      <input [(ngModel)]="product.title" placeholder="name"/>
-    </label>
+  <div class="card text-center">
+    <div class="card-body">
+      <h5 class="card-title">{{product.title}}</h5>
+      <p class="card-text"><img class="leftimg" src={{product.pictures}} alt="Card image cap" style=" height: 600px; width: 600px">
+        {{product.description}}</p>
+      <p class="card-text">Cost: {{product.cost}}$,       Days:{{product.days}}</p>
+      <button class="btn btn-primary  my-2 my-sm-0 mr-sm-2" (click)="_subscribe()">Subscribe</button>
+      <button class="btn btn-primary" (click)="goBack()">Go Back</button>
+    </div>
   </div>
-  <button (click)="goBack()">go back</button>
 </div>

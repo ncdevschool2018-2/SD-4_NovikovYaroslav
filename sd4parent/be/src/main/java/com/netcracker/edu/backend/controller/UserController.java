@@ -44,4 +44,25 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
+    @RequestMapping(value = "userLogin/{login}", method = RequestMethod.GET)
+    public ResponseEntity<User> getUserByLogin(@PathVariable(name = "login") String login) {
+        Optional<User> user = userService.findByLogin(login);
+        if (user.isPresent()) {
+            return ResponseEntity.ok(user.get());
+        }
+        else {
+            return ResponseEntity.noContent().build();
+        }
+
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ResponseEntity<User> getUserByLogins(@RequestParam("login") String login) {
+        Optional<User> user = userService.getUserByLogin(login);
+        if(user.isPresent())
+            return ResponseEntity.ok(user.get());
+        else
+            return ResponseEntity.notFound().build();
+    }
+
 }

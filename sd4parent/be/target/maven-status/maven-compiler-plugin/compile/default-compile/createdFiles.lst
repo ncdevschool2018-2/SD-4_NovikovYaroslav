@@ -24,6 +24,7 @@ com\netcracker\edu\backend\service\ProductService.class
 com\netcracker\edu\backend\entity\BillingAccount.class
 com\netcracker\edu\backend\controller\FeatureController.class
 com\netcracker\edu\backend\service\impl\TransactionServiceImpl.class
+com\netcracker\edu\backend\service\ChargeService.class
 com\netcracker\edu\backend\service\impl\UserServiceImpl.class
 com\netcracker\edu\backend\service\impl\ProductServiceImpl.class
 com\netcracker\edu\backend\entity\User.class

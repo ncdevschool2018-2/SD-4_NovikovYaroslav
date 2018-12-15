@@ -9,4 +9,6 @@ public interface ProductDataService {
     ProductViewModel getProductById(Long id);
     ProductViewModel saveProduct(ProductViewModel product);
     void deleteProduct(Long id);
+    /*List<ProductViewModel> getProductsByPage(int page);
+    int getTotalPages();*/
 }
