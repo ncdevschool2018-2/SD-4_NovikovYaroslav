@@ -9,6 +9,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Repository
 public interface PurseRepository extends JpaRepository<Purse, Long> {
     @Modifying
@@ -22,5 +24,8 @@ public interface PurseRepository extends JpaRepository<Purse, Long> {
     @Query("update Purse p set p.balance = p.balance + :money where p.id = :purseId")
     void topUpBalancePurse(@Param("money") Integer money,
                             @Param("purseId")Long purseId);
+
+    @Query("select p from Purse p where p.idAcc = :userId")
+    Optional<Purse> getPurseByOwnerId(@Param("userId")Long userId);
 
 }

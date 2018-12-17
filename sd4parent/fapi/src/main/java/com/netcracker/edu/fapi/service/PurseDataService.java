@@ -7,7 +7,8 @@ import java.util.List;
 
 public interface PurseDataService {
     List<PurseViewModel> getAll();
-    PurseViewModel getPurseById(Long id);
+    PurseViewModel getPurseById(String id);
     PurseViewModel savePurse(PurseViewModel purse);
     void deletePurse(Long id);
+    PurseViewModel getPurseByOwnerId(String id);
 }

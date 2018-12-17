@@ -9,4 +9,6 @@ public interface PurseService {
     Optional<Purse> getPurseById(Long id);
     Iterable<Purse> getAllPurses();
     void deletePurse(Long id);
+    Optional<Purse> getPurseByOwnerId(Long id);
+    //void fillUp(MoneyOperation purse);
 }

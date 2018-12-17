@@ -29,9 +29,19 @@ public class PurseDataController {
         return null;
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<PurseViewModel> getPurseById(@PathVariable String id) {
+        return ResponseEntity.ok(purseDataService.getPurseById(id));
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deletePurse(@PathVariable String id) {
         purseDataService.deletePurse(Long.valueOf(id));
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ResponseEntity<PurseViewModel> getPurseByOwnerId(@RequestParam("userId") String id) {
+        return ResponseEntity.ok(purseDataService.getPurseByOwnerId(id));
     }
 
 }

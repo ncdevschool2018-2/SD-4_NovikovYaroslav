@@ -44,4 +44,19 @@ public class PurseController {
         return ResponseEntity.noContent().build();
     }
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ResponseEntity<Purse> getPurseByOwnerId(@RequestParam("userId") Long id) {
+        Optional<Purse> purse = purseService.getPurseByOwnerId(id);
+        if (purse.isPresent())
+            return ResponseEntity.ok(purse.get());
+        else
+            return ResponseEntity.notFound().build();
+    }
+
+    /*@RequestMapping(value = "/fill", method = RequestMethod.POST)
+    public void fillUp(@RequestBody MoneyOperation purse) {
+        purseService.fillUp(purse);
+    }*/
+
+
 }

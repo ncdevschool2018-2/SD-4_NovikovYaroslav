@@ -14,6 +14,7 @@ public class Purse {
     private String number;
     @Column(name = "balance")
     private Integer balance;
+    @JoinColumn(name = "id_account", referencedColumnName = "id_account")
     @Column(name = "id_account")
     private long idAcc;
 

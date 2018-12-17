@@ -10,6 +10,7 @@ import {AccountProduct} from "../model/accountProduct";
 import {AuthService} from "../service/auth.service";
 import {AccountProductService} from "../service/account-product.service";
 import {moment} from "ngx-bootstrap/chronos/test/chain";
+import {AccountId} from "../model/accountId";
 
 @Component({
   selector: 'app-cards-detail',
@@ -19,6 +20,7 @@ export class CardsDetailComponent implements OnInit {
   product: Product;
   private subscriptions: Subscription[] = [];
   private user: User;
+  private accountId: AccountId = new AccountId();
   private accountProduct: AccountProduct = new AccountProduct();
 
   constructor(
@@ -37,8 +39,9 @@ export class CardsDetailComponent implements OnInit {
   private _subscribe(): void {
     this.subscriptions.push(this.userService.getUserByLogin(this.authService.getUsername()).subscribe(account => {
       this.user = account as User;
-      this.accountProduct.idAcc = this.user.id;
-      this.accountProduct.idPr = this.product.id;
+      this.accountId.id = this.user.id;
+      this.accountProduct.account = this.accountId;
+      this.accountProduct.product = this.product;
       this.accountProduct.dateBeg = moment().format('YYYY-MM-DD');
       this.accountProduct.dateEnd = moment(this.accountProduct.dateBeg).add(this.product.days, 'day').format('YYYY-MM-DD');
       this.accProdService.saveAccountProduct(this.accountProduct).subscribe()

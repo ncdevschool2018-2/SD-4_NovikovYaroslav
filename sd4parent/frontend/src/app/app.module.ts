@@ -23,6 +23,7 @@ import {CardsDetailComponent} from "./cards/cards-detail.component";
 import {AlertModule} from 'ngx-bootstrap/alert';
 import {TokenStorage} from "./service/token.storage";
 import {Interceptor} from "./service/interceptor.service";
+import {PurseComponent} from "./purse/purse.component";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {Interceptor} from "./service/interceptor.service";
     CarouselComponent,
     CardsComponent,
     AdminPageComponent,
-    CardsDetailComponent
+    CardsDetailComponent,
+    PurseComponent
   ],
   imports: [
     BrowserModule,

@@ -20,13 +20,14 @@ public class PurseDataServiceImpl implements PurseDataService{
     @Override
     public List<PurseViewModel> getAll() {
         RestTemplate restTemplate = new RestTemplate();
-        PurseViewModel[] purseViewModelResponse = restTemplate.getForObject(backendServerUrl + "/api/purses/", PurseViewModel[].class);
+        PurseViewModel[] purseViewModelResponse = restTemplate.getForObject(backendServerUrl + "/api/purses", PurseViewModel[].class);
         return purseViewModelResponse == null ? Collections.emptyList() : Arrays.asList(purseViewModelResponse);
     }
 
     @Override
-    public PurseViewModel getPurseById(Long id) {
-        return null;
+    public PurseViewModel getPurseById(String id) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(backendServerUrl + "/api/purses/" + id, PurseViewModel.class);
     }
 
     @Override
@@ -39,5 +40,11 @@ public class PurseDataServiceImpl implements PurseDataService{
     public void deletePurse(Long id) {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.delete(backendServerUrl + "/api/purses/" + id);
+    }
+
+    @Override
+    public PurseViewModel getPurseByOwnerId(String id) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(backendServerUrl + "/api/purses/?userId=" + id, PurseViewModel.class);
     }
 }

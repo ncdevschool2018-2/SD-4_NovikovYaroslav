@@ -1,8 +1,11 @@
+import {Purse} from "./purse";
+
 export class BillingAccount {
   id: string;
   name: string;
   surname: string;
   email: string;
+  purse: Purse;
 
   static cloneBase(billingAccout: BillingAccount): BillingAccount {
     let clonedBillingAccount: BillingAccount = new BillingAccount();

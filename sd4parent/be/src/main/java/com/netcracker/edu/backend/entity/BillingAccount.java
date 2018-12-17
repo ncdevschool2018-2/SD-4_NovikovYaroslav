@@ -27,7 +27,7 @@ public class BillingAccount {
     private User user;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_account")
+    @JoinColumn(name = "id_account", referencedColumnName = "id_purse")
     private Purse purse;
 
     @OneToMany(cascade = CascadeType.ALL)

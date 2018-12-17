@@ -37,4 +37,14 @@ public class PurseServiceImpl implements PurseService {
     public void deletePurse(Long id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public Optional<Purse> getPurseByOwnerId (Long id) {
+        return repository.getPurseByOwnerId(id);
+    }
+
+    /*@Override
+    public void fillUp(MoneyOperation purse) {
+        repository.fillUp(purse.getAmount(), purse.getId());
+    }*/
 }

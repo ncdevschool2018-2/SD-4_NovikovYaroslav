@@ -11,7 +11,7 @@ public class AccountProducts {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_account_products")
     private long id;
-    @ManyToOne(cascade= CascadeType.ALL)
+    @ManyToOne(cascade= CascadeType.MERGE)
     @JoinColumn(name = "id_account")
     private BillingAccount account;
     @OneToOne
