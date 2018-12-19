@@ -1,19 +1,25 @@
 package com.netcracker.edu.fapi.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.validator.constraints.CreditCardNumber;
+
+import javax.validation.constraints.NotBlank;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PurseViewModel {
 
     private long id;
+    @CreditCardNumber
+    @NotBlank
     private String number;
     private String balance;
+    @NotBlank
     private long idAcc;
 
     public PurseViewModel() {
     }
 
-    public PurseViewModel(long id, String number, String balance, long idAcc) {
+    public PurseViewModel(long id, @CreditCardNumber @NotBlank String number, String balance, @NotBlank long idAcc) {
         this.id = id;
         this.number = number;
         this.balance = balance;

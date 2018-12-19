@@ -1,5 +1,6 @@
 package com.netcracker.edu.fapi.service.impl;
 
+import com.netcracker.edu.fapi.models.MoneyOperationViewModel;
 import com.netcracker.edu.fapi.models.PurseViewModel;
 import com.netcracker.edu.fapi.service.PurseDataService;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,5 +47,11 @@ public class PurseDataServiceImpl implements PurseDataService{
     public PurseViewModel getPurseByOwnerId(String id) {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject(backendServerUrl + "/api/purses/?userId=" + id, PurseViewModel.class);
+    }
+
+    @Override
+    public void topUpBalancePurse(MoneyOperationViewModel purse) {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.postForEntity(backendServerUrl + "/api/purses/fill", purse, MoneyOperationViewModel.class);
     }
 }

@@ -1,0 +1,72 @@
+<div class="container-fluid" *ngIf="user">
+  <div class="row">
+    <div class="col-2">
+    </div>
+    <div class="col-8">
+      <div class="box">
+        <p class="text-center">Login</p>
+      </div>
+      <h2>{{ user.login }}</h2>
+      <hr>
+      <div class="box bottom">
+        <p class="text-center">Name</p>
+      </div>
+      <h2>{{ user.account.name }}</h2>
+      <hr>
+      <div class="box bottom">
+        <p class="text-center">Surname</p>
+      </div>
+      <h2>{{ user.account.surname }}</h2>
+      <hr>
+      <div class="box bottom">
+        <p class="text-center">Email</p>
+      </div>
+      <h2>{{ user.account.email }}</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-5">
+    </div>
+    <div class="col-2">
+      <button id="myBtn" class="btn btn-custom btn-block btn-lg" (click)="_openModal(template,user)">Edit</button>
+    </div>
+    <div class="col-5">
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<ng-template #template>
+  <div class="modal-header">
+    <h1 class="modal-title pull-left">Edit account</h1>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" class="form-control" name="name" [(ngModel)]="editableUs.account.name" #name="ngModel" required/>
+      <div [hidden]="name.valid || name.untouched" class="alert alert-danger">
+        Pls set name <!--Easy way to create client validation-->
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Surname</label>
+      <input type="text" class="form-control" name="surname" [(ngModel)]="editableUs.account.surname" #surname="ngModel" required/>
+      <div [hidden]="surname.valid || surname.untouched" class="alert alert-danger">
+        Pls set surname <!--Easy way to create client validation-->
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" class="form-control" name="email" [(ngModel)]="editableUs.account.email" #email="ngModel" required/>
+      <div [hidden]="email.valid || email.untouched" class="alert alert-danger">
+        Pls set Email <!--Easy way to create client validation-->
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-custom" (click)="_addUser()"
+              [disabled]="name.invalid || surname.invalid || email.invalid">Create</button>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()">Close</button>
+    </div>
+  </div>
+</ng-template>

@@ -34,4 +34,9 @@ public class AccountProductsDataController {
         accountProductsDataService.deleteAccountProducts(Long.valueOf(id));
     }
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ResponseEntity<List<AccountProductsViewModel>> getAccountProductsByUserId(@RequestParam("login") String login) {
+        return ResponseEntity.ok(accountProductsDataService.getAccountProductsByUserId(login));
+    }
+
 }

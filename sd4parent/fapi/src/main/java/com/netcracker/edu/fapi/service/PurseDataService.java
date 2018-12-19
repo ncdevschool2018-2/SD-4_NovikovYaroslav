@@ -1,5 +1,6 @@
 package com.netcracker.edu.fapi.service;
 
+import com.netcracker.edu.fapi.models.MoneyOperationViewModel;
 import com.netcracker.edu.fapi.models.PurseViewModel;
 import org.springframework.http.ResponseEntity;
 
@@ -11,4 +12,5 @@ public interface PurseDataService {
     PurseViewModel savePurse(PurseViewModel purse);
     void deletePurse(Long id);
     PurseViewModel getPurseByOwnerId(String id);
+    void topUpBalancePurse(MoneyOperationViewModel purse);
 }

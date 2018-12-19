@@ -11,10 +11,13 @@ import {AuthService} from "../service/auth.service";
 import {AccountProductService} from "../service/account-product.service";
 import {moment} from "ngx-bootstrap/chronos/test/chain";
 import {AccountId} from "../model/accountId";
+import {Purse} from "../model/purse";
+import {PurseService} from "../service/purse.service";
 
 @Component({
   selector: 'app-cards-detail',
-  templateUrl: './cards-detail.component.html'
+  templateUrl: './cards-detail.component.html',
+  styleUrls: ['./cards-detail.component.css']
 })
 export class CardsDetailComponent implements OnInit {
   product: Product;
@@ -22,6 +25,7 @@ export class CardsDetailComponent implements OnInit {
   private user: User;
   private accountId: AccountId = new AccountId();
   private accountProduct: AccountProduct = new AccountProduct();
+  public purse: Purse;
 
   constructor(
     private userService: UserService,
@@ -29,11 +33,13 @@ export class CardsDetailComponent implements OnInit {
     private accProdService: AccountProductService,
     private route: ActivatedRoute,
     private productService: ProductService,
-    private location: Location
+    private location: Location,
+    private purseService: PurseService
   ) {}
 
   ngOnInit(): void {
     this.getProduct();
+    this.loadPurse();
   }
 
   private _subscribe(): void {
@@ -52,6 +58,18 @@ export class CardsDetailComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.productService.getProductById(id)
       .subscribe(product => this.product = product);
+  }
+
+  private loadPurse() {
+    this.subscriptions.push(this.userService.getUserByLogin(this.authService.getUsername()).subscribe(account => {
+      this._getPurseByOwnerId(account.id);
+    }));
+  }
+
+  _getPurseByOwnerId(accountId: string) {
+    this.subscriptions.push(this.purseService.getPurseByOwnerId(accountId).subscribe( purses => {
+      this.purse = purses;
+    }));
   }
 
 

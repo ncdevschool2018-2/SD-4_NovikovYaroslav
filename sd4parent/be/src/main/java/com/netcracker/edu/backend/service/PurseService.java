@@ -1,5 +1,6 @@
 package com.netcracker.edu.backend.service;
 
+import com.netcracker.edu.backend.entity.MoneyOperation;
 import com.netcracker.edu.backend.entity.Purse;
 
 import java.util.Optional;
@@ -10,5 +11,5 @@ public interface PurseService {
     Iterable<Purse> getAllPurses();
     void deletePurse(Long id);
     Optional<Purse> getPurseByOwnerId(Long id);
-    //void fillUp(MoneyOperation purse);
+    void fillUp(MoneyOperation purse);
 }

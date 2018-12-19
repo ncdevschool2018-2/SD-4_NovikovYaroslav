@@ -10,7 +10,7 @@
           <a href="#" class="nav-link" routerLink="/cards">Subscriptions</a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">My subscriptions</a>
+          <a href="#" class="nav-link" routerLink="/mycards">My subscriptions</a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link" routerLink="/purse">Balance</a>
@@ -32,26 +32,13 @@
       </ul>
 
       <form class="form-inline my-2 my-lg-0">
-        <div class="btn-group mr-sm-2" dropdown>
-          <button id="button-basic" dropdownToggle type="button" class="btn btn-outline-light my-2 my-sm-0 mr-sm-2 dropdown-toggle" aria-controls="dropdown-basic">
-            Categories <span class="caret"></span>
-          </button>
-          <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-            <li role="menuitem"><button class="dropdown-item">Category 1</button></li>
-            <li role="menuitem"><button class="dropdown-item">Category 2</button></li>
-            <li role="menuitem"><button class="dropdown-item">Category 3</button></li>
-          </ul>
-        </div>
-        <input type="text" class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light my-2 my-sm-0 mr-sm-2">Search</button>
-
         <div class="btn-group mr-sm-2" dropdown *ngIf="user && role === 'user'">
           <button id="button-basic1" dropdownToggle type="button" class="btn btn-outline-light my-2 my-sm-0 mr-sm-2 dropdown-toggle" aria-controls="dropdown-basic">
             <img src="img/img_avatar2.png" width="25" height="25" class="d-inline-block align-top" alt="">
             {{user.sub}} <span class="caret"></span>
           </button>
           <ul id="dropdown-basic1" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic" >
-            <li role="menuitem"><button class="dropdown-item">Information</button></li>
+            <li role="menuitem"><button class="dropdown-item" routerLink="/userinfo">Information</button></li>
             <li role="menuitem"><button class="dropdown-item">Settings</button></li>
             <li role="menuitem"><button class="dropdown-item">Support</button></li>
             <li class="divider dropdown-divider"></li>
@@ -105,7 +92,7 @@
         <div class="container">
           <div class="row justify-content-between">
             <button type="button" class="btn btn-primary" (click)="_openModal(registerModal)">Register</button>
-            <button type="reset" class="btn btn-primary" (click)="authorizate()" [disabled]="login.invalid || password.invalid">Sign in</button>
+            <button type="reset" class="btn btn-primary" (click)="authorizate()" [hidden]="login.invalid || password.invalid">Sign in</button>
           </div>
         </div>
       </form>

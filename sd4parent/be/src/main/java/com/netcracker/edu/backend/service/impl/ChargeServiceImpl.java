@@ -25,9 +25,9 @@ public class ChargeServiceImpl implements ChargeService {
     @Autowired
     private AccountProductsRepository subscribeRepository;
 
-    private List<AccountProducts> subscribe;
+    private List<AccountProducts> subscribe = new ArrayList<>();
 
-    @Scheduled (fixedRate = 5000)
+    //@Scheduled (fixedRate = 5000)
     @Override
     public void scheduledCharge() {
         loadSubscription();
@@ -37,8 +37,10 @@ public class ChargeServiceImpl implements ChargeService {
 
     @Override
     public void loadSubscription() {
-        subscribe = new ArrayList<AccountProducts>();
-        subscribe.addAll(subscribeRepository.findAll());
+        Iterable<AccountProducts> iterableSubs = subscribeRepository.findAll();
+        for (AccountProducts sub : iterableSubs) {
+            subscribe.add(sub);
+        }
     }
 
     @Override
@@ -46,7 +48,6 @@ public class ChargeServiceImpl implements ChargeService {
         boolean status;
         Date localDate = new Date();
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("YYYY-MM-DD");
-
         if(!localDate.before(subscribe.getDateEnd()) ||
                 subscribe.getAccount().getPurse().getBalance() <
                         subscribe.getProduct().getCost()) {

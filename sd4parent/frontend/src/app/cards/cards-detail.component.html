@@ -11,8 +11,9 @@
       <p class="card-text"><img class="leftimg" src={{product.pictures}} alt="Card image cap" style=" height: 600px; width: 600px">
         {{product.description}}</p>
       <p class="card-text">Cost: {{product.cost}}$,       Days:{{product.days}}</p>
-      <button class="btn btn-primary  my-2 my-sm-0 mr-sm-2" (click)="_subscribe()">Subscribe</button>
-      <button class="btn btn-primary" (click)="goBack()">Go Back</button>
+      <button class="btn btn-custom  my-2 my-sm-0 mr-sm-2" (click)="_subscribe()" *ngIf=
+        "purse">Subscribe</button>
+      <button class="btn btn-custom" (click)="goBack()">Go Back</button>
     </div>
   </div>
 </div>

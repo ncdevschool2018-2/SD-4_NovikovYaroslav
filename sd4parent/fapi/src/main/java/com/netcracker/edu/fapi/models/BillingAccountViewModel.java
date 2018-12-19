@@ -2,15 +2,20 @@ package com.netcracker.edu.fapi.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BillingAccountViewModel {
 
     private int id;
+    @Size(min = 2, max = 30)
     private String name;
+    @Size(min = 2, max = 30)
     private String surname;
     private String email;
+    @NotBlank
     private Object user;
     private Object purse;
     private List<Object> accountProducts;
@@ -18,7 +23,8 @@ public class BillingAccountViewModel {
     public BillingAccountViewModel() {
     }
 
-    public BillingAccountViewModel(int id, String name, String surname, String email, Object user, Object purse, List<Object> accountProducts) {
+    public BillingAccountViewModel(int id, @Size(min = 2, max = 30) String name, @Size(min = 2, max = 30) String surname,
+                                   String email, @NotBlank Object user, Object purse, List<Object> accountProducts) {
         this.id = id;
         this.name = name;
         this.surname = surname;

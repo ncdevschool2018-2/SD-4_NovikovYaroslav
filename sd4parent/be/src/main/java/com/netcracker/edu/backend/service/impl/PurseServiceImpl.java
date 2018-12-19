@@ -1,5 +1,6 @@
 package com.netcracker.edu.backend.service.impl;
 
+import com.netcracker.edu.backend.entity.MoneyOperation;
 import com.netcracker.edu.backend.entity.Purse;
 import com.netcracker.edu.backend.repository.PurseRepository;
 import com.netcracker.edu.backend.service.PurseService;
@@ -43,8 +44,8 @@ public class PurseServiceImpl implements PurseService {
         return repository.getPurseByOwnerId(id);
     }
 
-    /*@Override
+    @Override
     public void fillUp(MoneyOperation purse) {
-        repository.fillUp(purse.getAmount(), purse.getId());
-    }*/
+        repository.topUpBalancePurse(purse.getAmount(), purse.getId());
+    }
 }

@@ -1,0 +1,32 @@
+.container-fluid {
+  margin-top: 40px;
+  width: 1300px;
+}
+
+.btn-custom {
+  background-color: #FC6602;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  margin: 0px 0px 0px 0px;
+}
+.btn-info{
+  margin: 0px 0px 0px 5px;
+}
+
+.btn-custom:hover {
+  background-color: #39AEA9;
+}
+
+h2 {
+  margin-top: 5px;
+}
+
+h1{
+  color: #39AEA9;
+  margin-left: 130px;
+}

@@ -1,6 +1,7 @@
 package com.netcracker.edu.fapi.service.impl;
 
 import com.netcracker.edu.fapi.models.AccountProductsViewModel;
+import com.netcracker.edu.fapi.models.MoneyOperationViewModel;
 import com.netcracker.edu.fapi.service.AccountProductsDataService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -40,4 +41,12 @@ public class AccountProductsDataServiceImpl implements AccountProductsDataServic
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.delete(backendServerUrl + "/api/account-products/" + id);
     }
+
+    @Override
+    public List<AccountProductsViewModel> getAccountProductsByUserId(String login) {
+        RestTemplate restTemplate = new RestTemplate();
+        AccountProductsViewModel[] accountProductsViewModelResponse = restTemplate.getForObject(backendServerUrl + "api/account-products/?login=" + login, AccountProductsViewModel[].class);
+        return accountProductsViewModelResponse == null ? Collections.emptyList() : Arrays.asList(accountProductsViewModelResponse);
+    }
+
 }

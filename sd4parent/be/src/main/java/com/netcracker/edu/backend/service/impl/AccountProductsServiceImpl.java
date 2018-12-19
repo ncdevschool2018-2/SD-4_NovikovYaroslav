@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
-
+import static com.netcracker.edu.backend.repository.specification.AccountProductsSpecification.subscriptionsFindByUserId;
 @Component
 public class AccountProductsServiceImpl implements AccountProductsService {
 
@@ -36,5 +36,10 @@ public class AccountProductsServiceImpl implements AccountProductsService {
     @Override
     public void deleteAccountProducts(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public Iterable<AccountProducts> getAccountProductsByUserId(String login) {
+        return this.repository.findAll(subscriptionsFindByUserId(login));
     }
 }

@@ -1,5 +1,6 @@
 package com.netcracker.edu.backend.controller;
 
+import com.netcracker.edu.backend.entity.MoneyOperation;
 import com.netcracker.edu.backend.entity.Purse;
 import com.netcracker.edu.backend.service.PurseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,13 +51,12 @@ public class PurseController {
         if (purse.isPresent())
             return ResponseEntity.ok(purse.get());
         else
-            return ResponseEntity.notFound().build();
+            return null;
     }
 
-    /*@RequestMapping(value = "/fill", method = RequestMethod.POST)
+    @RequestMapping(value = "/fill", method = RequestMethod.POST)
     public void fillUp(@RequestBody MoneyOperation purse) {
         purseService.fillUp(purse);
-    }*/
-
+    }
 
 }

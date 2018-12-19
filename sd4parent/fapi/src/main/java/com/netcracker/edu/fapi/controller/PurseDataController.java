@@ -1,5 +1,6 @@
 package com.netcracker.edu.fapi.controller;
 
+import com.netcracker.edu.fapi.models.MoneyOperationViewModel;
 import com.netcracker.edu.fapi.models.PurseViewModel;
 import com.netcracker.edu.fapi.service.PurseDataService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,11 @@ public class PurseDataController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<PurseViewModel> getPurseByOwnerId(@RequestParam("userId") String id) {
         return ResponseEntity.ok(purseDataService.getPurseByOwnerId(id));
+    }
+
+    @RequestMapping(value = "/fill", method = RequestMethod.POST)
+    public void setMoneyForWallet(@RequestBody MoneyOperationViewModel purse) {
+        purseDataService.topUpBalancePurse(purse);
     }
 
 }

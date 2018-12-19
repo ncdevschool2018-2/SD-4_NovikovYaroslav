@@ -30,5 +30,4 @@ export class BillingAccountService { //todo create interface
     console.log("/api/ba/auth?login=" + login + "&password=" + password);
     return this.http.get<User>("/api/ba/auth?login=" + login + "&password=" + password);
   }
-
 }

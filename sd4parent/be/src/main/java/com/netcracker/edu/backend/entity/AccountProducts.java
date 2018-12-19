@@ -11,10 +11,10 @@ public class AccountProducts {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_account_products")
     private long id;
-    @ManyToOne(cascade= CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_account")
     private BillingAccount account;
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_product")
     private Product product;
     @Column(name = "date_beg")

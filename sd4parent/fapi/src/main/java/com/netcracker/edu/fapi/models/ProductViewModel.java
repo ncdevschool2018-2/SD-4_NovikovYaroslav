@@ -2,21 +2,31 @@ package com.netcracker.edu.fapi.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductViewModel {
 
     private int id;
+    @NotBlank
+    @Size(min = 2, max = 20)
     private String title;
+    @NotBlank
     private String cost;
+    @NotBlank
     private String days;
+    @NotBlank
     private String description;
+    @NotBlank
     private String pictures;
 
     public ProductViewModel(){
 
     }
 
-    public ProductViewModel(int id, String title, String cost, String days, String description, String pictures) {
+    public ProductViewModel(int id, @NotBlank @Size(min = 2, max = 20) String title, @NotBlank String cost,
+                            @NotBlank String days, @NotBlank String description, @NotBlank String pictures) {
         this.id = id;
         this.title = title;
         this.cost = cost;

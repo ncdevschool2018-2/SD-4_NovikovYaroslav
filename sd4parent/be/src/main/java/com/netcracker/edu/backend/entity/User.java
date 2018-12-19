@@ -1,6 +1,7 @@
 package com.netcracker.edu.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -22,7 +23,8 @@ public class User {
     private String role;
 
     @PrimaryKeyJoinColumn(name = "id_user", referencedColumnName = "id_account")
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.MERGE)
+    @JsonManagedReference
     private BillingAccount account;
 
     public User() {

@@ -30,10 +30,7 @@
     <div class="col-2">
     </div>
     <div class="col-6">
-      <div class="box">
-        <p class="text-center">USD</p>
-      </div>
-      <h2>Няма кашелка</h2>
+      <h2>Purse not loaded</h2>
     </div>
     <div class="col-2">
       <button id="myBtn1" class="btn btn-custom btn-block btn-lg" (click)="_openModal(template1)">Add purse</button>
@@ -44,25 +41,25 @@
 <!-- Modal -->
 <ng-template #template1>
   <div class="modal-header">
-    <h4 class="modal-title pull-left"> new Purse</h4>
+    <h1 class="modal-title pull-left"> new Purse</h1>
   </div>
   <div class="modal-body">
     <div class="form-group">
       <label>Number</label>
-      <input class="form-control" name="number" [(ngModel)]="editablePurse.number" #number="ngModel" required/>
+      <input type="text" class="form-control" name="number" [(ngModel)]="editablePurse.number" #number="ngModel" required pattern="[0-9]{16}"/>
       <div [hidden]="number.valid || number.untouched" class="alert alert-danger">
         Pls set number
       </div>
     </div>
     <div class="form-group">
       <label>Balance</label>
-      <input class="form-control" name="balance" [(ngModel)]="editablePurse.balance" #balance="ngModel" required/>
+      <input type="text" class="form-control" name="balance" [(ngModel)]="editablePurse.balance" #balance="ngModel" required pattern="[0-9]"/>
       <div [hidden]="balance.valid || balance.untouched" class="alert alert-danger">
         Pls set balance <!--Easy way to create client validation-->
       </div>
     </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-default" (click)="addPurse()"
+    <button type="button" class="btn btn-custom" (click)="addPurse()"
             [disabled]="number.invalid || balance.invalid">Create</button>
     <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()">Close</button>
   </div>
@@ -71,14 +68,18 @@
 </ng-template>
 
 
-<!--<ng-template #template>
+<ng-template #template>
   <div class="modal-header">
-    <h1 class="modal-title">Wallet Refill</h1>
+    <h1 class="modal-title">Purse Refill</h1>
   </div>
   <div class="modal-body">
     <div class="form-group">
-      <input type="text" class="form-control" name="amount" placeholder="Enter amount" [(ngModel)]="amount">
+      <input type="text" class="form-control" name="amount" placeholder="Enter amount" #amount1 = "ngModel" [(ngModel)]="amount"
+             required pattern="[0-9]{1,6}">
+      <div [hidden]="amount1.valid || amount1.untouched" class="alert alert-danger">
+        Amount is incorrect
+      </div>
     </div>
-    <input type="button" value="Fill Up" (click)="_fillUp(wallet.id)">
+    <input type="button" value="Fill Up" [disabled]="amount1.invalid" (click)="_fillUp(purse.id)">
   </div>
-</ng-template>-->
+</ng-template>

@@ -9,4 +9,5 @@ public interface AccountProductsService {
     Optional<AccountProducts> getAccountProductsById(Long id);
     Iterable<AccountProducts> getAllAccountProducts();
     void deleteAccountProducts(Long id);
+    Iterable<AccountProducts> getAccountProductsByUserId(String login);
 }

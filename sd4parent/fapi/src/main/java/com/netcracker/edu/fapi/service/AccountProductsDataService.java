@@ -10,4 +10,5 @@ public interface AccountProductsDataService {
     AccountProductsViewModel getAccountProductsById(Long id);
     AccountProductsViewModel saveAccountProducts(AccountProductsViewModel accountProducts);
     void deleteAccountProducts(Long id);
+    List<AccountProductsViewModel> getAccountProductsByUserId(String login);
 }

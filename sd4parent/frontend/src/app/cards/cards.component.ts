@@ -7,7 +7,8 @@ import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
 
 @Component({
   selector: 'card',
-  templateUrl: './cards.component.html'
+  templateUrl: './cards.component.html',
+  styleUrls: ['./cards.component.css']
 })
 
 export class CardsComponent implements OnInit {
@@ -85,7 +86,6 @@ export class CardsComponent implements OnInit {
       // Parse json response into local array
       this.products = products as Product[];
       // Check data in console
-      console.log(this.products);// don't use console.log in angular :)
       this.loadingService.hide();
     }));
   }

@@ -1,0 +1,92 @@
+.container-fluid {
+  margin-top: 40px;
+  width: 1300px;
+}
+
+.btn-custom {
+  background-color: #FC6602;
+  color: white;
+}
+
+.btn-custom:hover {
+  background-color: #39AEA9;
+}
+
+/*
+.col-8 {
+  background-color: #E7E5E7;
+  border-radius: 10px;
+}
+*/
+
+h2 {
+  margin-top: 5px;
+}
+
+.box {
+  float: left;
+  width: 70px;
+  height: 25px;
+  margin: 15px;
+  margin-left: 10px;
+  background-color: #39AEA9;
+  color: white;
+}
+
+.bottom {
+  margin: 5px;
+  margin-left: 10px;
+  margin-right: 15px;
+}
+
+h1{
+  color: #39AEA9;
+  margin-left: 130px;
+}
+
+input[type=button], input[type=submit], input[type=reset]  {
+  background-color: #FC6602;
+  border: none;
+  color: white;
+  padding: 15px 90px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 13px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  margin: 5px 20px 40px 120px;
+}
+
+input[type=button].forgot {
+  margin-left: 120px;
+}
+
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
+  background-color: #39AEA9;
+}
+
+input[type=text], input[type=password] {
+  background-color: #f6f6f6;
+  border: none;
+  color: #0d0d0d;
+  padding: 20px 22px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  border: 2px solid #f6f6f6;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #fff;
+  border: 2px solid #FC6602;
+}
+
+input[type=text]::placeholder {
+  color: #cccccc;
+}

@@ -64,7 +64,6 @@ export class NavbarComponent implements OnInit {
       let token: Token = authToken as Token;
       this.tokenStorage.saveToken(token.token);
       this.user = this.authService.decodeJwt(token.token);
-      console.log(this.user);
       this.role = this.user.scopes;
       this._closeModal();
     }));

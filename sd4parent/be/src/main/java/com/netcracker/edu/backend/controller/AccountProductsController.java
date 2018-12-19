@@ -44,4 +44,9 @@ public class AccountProductsController {
         return ResponseEntity.noContent().build();
     }
 
+    @RequestMapping(value="/", method = RequestMethod.GET)
+    public Iterable<AccountProducts> getAccountProductsByUserId(@RequestParam("login") String login) {
+        return accountProductsService.getAccountProductsByUserId(login);
+    }
+
 }
